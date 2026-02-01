@@ -55,5 +55,5 @@ Original | No | Fidedigna | Depurar manualmente
 # Diagrama
 
 ![Jerarquía de las relaciones - Webshop](./jerarquia_de_las_relaciones_webshop.png)
-Nota: Si no emplea su original la llave foranea address -> customer está rota.
-[Más información sobre las relaciones.](https://github.com/urielhdz/sql-workshop/blob/main/schema.md)
+Nota: Si no emplea su original la llave foránea address -> customer está rota.
+[Más información sobre las relaciones](https://github.com/urielhdz/sql-workshop/blob/main/schema.md), por [Uriel Hernández](https://github.com/urielhdz), [Código Facilito](https://github.com/codigofacilito).
