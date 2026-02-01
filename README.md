@@ -1,21 +1,53 @@
-# PostgreSQL Sample Database
+# Base de datos: Tienda Online
 
-This is a sample webshop, including 
+Copia de [PostgreSQL Sample Database](https://github.com/JannikArndt/PostgreSQLSampleDatabase), [Jannik Arndt](https://github.com/JannikArndt), con corrección de errores, para la creación de la bd desde los scripts en psql. Para la restauración desde los archivos dump ver el repositorio original.
 
-* 1000 customers
-* 2000 orders
-* 1000 products with 17730 different articles
+# Instrucciones
 
-You can either create the database yourself with the scripts in `src` or restore the dump in `data` via
+- **Opcion A: Un solo archivo.**
+  - Descargue el archivo CREATE_ALL.sql en ./BBDD/unificada
 
-```bash
-$ ./restore.sh myDatabaseName
-```
+  - Copie y pegue `\i 'ruta/CREATE_ALL.sql'` en psql reemplazando ruta por la dirección correspondiente a su ubicación en su PC.
 
-(using the defaults `localhost:5432` and user `postgres`)
+- **Opcion B: Varios archivos.**
+   - Descargue el directorio ./BBDD/modificada
+ 
+   - Ejecute uno a uno (en el orden especificado):
+     - `\i './modificada/CREATE_TABLES.sql'`
+     - `\i './modificada/CREATE_COLORS.sql'`
+     - `\i './modificada/CREATE_SIZES.sql'`
+     - `\i './modificada/CREATE_LABELS.sql'`
+     - `\i './modificada/CREATE_PRODUCTS.sql'`
+     - `\i './modificada/CREATE_STOCK.sql'`
+     - `\i './modificada/CREATE_ADDRESS.sql'`
+     - `\i './modificada/CREATE_CUSTOMERS.sql'`
+     - `\i './modificada/CREATE_ORDERS.sql'`
 
-## Schema
+- **Opcion C: Original.**
+  - Descargue el directorio ./BBDD/original
+ 
+  - Ejecute uno a uno (atento a los pasos intermedios):
+     - `\i './original/CREATE_TABLES.sql'`
+     - `\i './original/CREATE_COLORS.sql'`
+     - `\i './original/CREATE_SIZES.sql'`
+     - `\i './original/CREATE_LABELS.sql'`
+     - Reemplazar size (línea 127) por sizeid en CREATE_PRODUCTS.sql
+     - `\i './original/CREATE_PRODUCTS.sql'`
+     - `\i './original/CREATE_STOCK.sql'`
+     - En el archivo CREATE_ADDRESS.sql:
+     - Eliminar NULL (línea 1001)
+     - Convertir de Windows 1252 a UTF-8 
+     - Eliminar foránea restrictiva (desde psql): `ALTER TABLE webshop.address DROP CONSTRAINT address_customerid_fkey; `
+     - Restablecer la foránea (paso opcional, para lo cual deberá eliminar los registros conflictivos): `ALTER TABLE webshop.address ADD CONSTRAINT fk_address_to_customer FOREIGN KEY (customerId) REFERENCES webshop.customer (id);`
+     - `\i './original/CREATE_ADDRESS.sql'`
+     - `\i './original/CREATE_CUSTOMERS.sql'`
+     - Reemplazar customer (línea 14) por customerId en CREATE_ORDERS.sql
+     - `\i './original/CREATE_ORDERS.sql'`
 
-Created with schemaspy:
+# Tabla comparativa
 
-![](schema/diagrams/summary/relationships.real.large.png)
+BD/ Características  | Libre de errores | Integridad | Uso recomendado
+------------- | ------------- | ------------- | -------------
+Unificada  | Sí | Mala. Caracteres extraviados  | Poco tiempo para examinar detalles
+Modificada | Sí | Mala. Caracteres extraviados | Visualizar mejor si existen conflictos
+Original | No | Fidedigna | Depurar manualmente
