@@ -38,8 +38,8 @@ Copia de [PostgreSQL Sample Database](https://github.com/JannikArndt/PostgreSQLS
        - Eliminar NULL (línea 1001)
        - Convertir de Windows 1252 a UTF-8 
        - Eliminar foránea restrictiva (desde psql): `ALTER TABLE webshop.address DROP CONSTRAINT address_customerid_fkey; `
-       - Restablecer la foránea (paso opcional, para lo cual deberá eliminar los registros conflictivos): `ALTER TABLE webshop.address ADD CONSTRAINT fk_address_to_customer FOREIGN KEY (customerId) REFERENCES webshop.customer (id);`
      - `\i './original/CREATE_ADDRESS.sql'`
+     - Restablecer la foránea en CREATE_ADDRESS.sql (paso opcional, para lo cual deberá eliminar los registros conflictivos primero): `ALTER TABLE webshop.address ADD CONSTRAINT fk_address_to_customer FOREIGN KEY (customerId) REFERENCES webshop.customer (id);`
      - `\i './original/CREATE_CUSTOMERS.sql'`
      - Reemplazar customer (línea 14) por customerId en CREATE_ORDERS.sql
      - `\i './original/CREATE_ORDERS.sql'`
@@ -50,10 +50,10 @@ BD/ Características  | Libre de errores | Integridad | Uso recomendado
 ------------- | ------------- | ------------- | -------------
 Unificada  | Sí | Mala. Caracteres extraviados  | Poco tiempo para examinar detalles
 Modificada | Sí | Mala. Caracteres extraviados | Visualizar mejor si existen conflictos
-Original | No | Fidedigna | Depurar manualmente
+Original | No | Fidedigna | Depurar manualmente según su caso
 
 # Diagrama
 
 ![Jerarquía de las relaciones - Webshop](./jerarquia_de_las_relaciones_webshop.png)
 Nota: Si no emplea su original la llave foránea address -> customer está rota.
-[Más información sobre las relaciones](https://github.com/urielhdz/sql-workshop/blob/main/schema.md), por [Uriel Hernández](https://github.com/urielhdz), [Código Facilito](https://github.com/codigofacilito).
+[Más información sobre las relaciones, campos y llaves](https://github.com/urielhdz/sql-workshop/blob/main/schema.md), por [Uriel Hernández](https://github.com/urielhdz), [Código Facilito](https://github.com/codigofacilito).
