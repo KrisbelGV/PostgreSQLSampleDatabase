@@ -5,44 +5,44 @@ Copia de [PostgreSQL Sample Database](https://github.com/JannikArndt/PostgreSQLS
 # Instrucciones
 
 - **Opcion A: Un solo archivo.**
-  - Descargue el archivo CREATE_ALL.sql en ./BBDD/unificada
+  - Descargue el archivo CREATE_ALL.sql en ./BBDD/UNIFICADA
 
   - Copie y pegue `\i 'ruta/CREATE_ALL.sql'` en psql reemplazando ruta por la dirección correspondiente a su ubicación en su PC.
 
 - **Opcion B: Varios archivos.**
-   - Descargue el directorio ./BBDD/modificada
+   - Descargue el directorio ./BBDD/MODIFICADA
  
    - Ejecute uno a uno (en el orden especificado):
-     - `\i './modificada/CREATE_TABLES.sql'`
-     - `\i './modificada/CREATE_COLORS.sql'`
-     - `\i './modificada/CREATE_SIZES.sql'`
-     - `\i './modificada/CREATE_LABELS.sql'`
-     - `\i './modificada/CREATE_PRODUCTS.sql'`
-     - `\i './modificada/CREATE_STOCK.sql'`
-     - `\i './modificada/CREATE_ADDRESS.sql'`
-     - `\i './modificada/CREATE_CUSTOMERS.sql'`
-     - `\i './modificada/CREATE_ORDERS.sql'`
+     - `\i './MODIFICADA/CREATE_TABLES.sql'`
+     - `\i './MODIFICADA/CREATE_COLORS.sql'`
+     - `\i './MODIFICADA/CREATE_SIZES.sql'`
+     - `\i './MODIFICADA/CREATE_LABELS.sql'`
+     - `\i './MODIFICADA/CREATE_PRODUCTS.sql'`
+     - `\i './MODIFICADA/CREATE_STOCK.sql'`
+     - `\i './MODIFICADA/CREATE_ADDRESS.sql'`
+     - `\i './MODIFICADA/CREATE_CUSTOMERS.sql'`
+     - `\i './MODIFICADA/CREATE_ORDERS.sql'`
 
 - **Opcion C: Original.**
-  - Descargue el directorio ./BBDD/original
+  - Descargue el directorio ./BBDD/ORIGINAL
  
   - Ejecute uno a uno (atento a los pasos intermedios):
-     - `\i './original/CREATE_TABLES.sql'`
-     - `\i './original/CREATE_COLORS.sql'`
-     - `\i './original/CREATE_SIZES.sql'`
-     - `\i './original/CREATE_LABELS.sql'`
+     - `\i './ORIGINAL/CREATE_TABLES.sql'`
+     - `\i './ORIGINAL/CREATE_COLORS.sql'`
+     - `\i './ORIGINAL/CREATE_SIZES.sql'`
+     - `\i './ORIGINAL/CREATE_LABELS.sql'`
      - Reemplazar size (línea 127) por sizeid en CREATE_PRODUCTS.sql
-     - `\i './original/CREATE_PRODUCTS.sql'`
-     - `\i './original/CREATE_STOCK.sql'`
+     - `\i './ORIGINAL/CREATE_PRODUCTS.sql'`
+     - `\i './ORIGINAL/CREATE_STOCK.sql'`
      - En el archivo CREATE_ADDRESS.sql:
        - Eliminar NULL (línea 1001)
-       - Convertir de Windows 1252 a UTF-8 
+       - Formatear a UTF-8 si es requerido
        - Eliminar foránea restrictiva (desde psql): `ALTER TABLE webshop.address DROP CONSTRAINT address_customerid_fkey; `
-     - `\i './original/CREATE_ADDRESS.sql'`
+     - `\i './ORIGINAL/CREATE_ADDRESS.sql'`
      - Restablecer la foránea en CREATE_ADDRESS.sql (paso opcional, para lo cual deberá eliminar los registros conflictivos primero): `ALTER TABLE webshop.address ADD CONSTRAINT fk_address_to_customer FOREIGN KEY (customerId) REFERENCES webshop.customer (id);`
-     - `\i './original/CREATE_CUSTOMERS.sql'`
+     - `\i './ORIGINAL/CREATE_CUSTOMERS.sql'`
      - Reemplazar customer (línea 14) por customerId en CREATE_ORDERS.sql
-     - `\i './original/CREATE_ORDERS.sql'`
+     - `\i './ORIGINAL/CREATE_ORDERS.sql'`
 
 # Tabla comparativa
 
